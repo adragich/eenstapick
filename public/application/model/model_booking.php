@@ -15,4 +15,16 @@ class Model_Booking extends Model {
         }
         return $result;
     }
+
+    public function getSortedTags() {
+        $result = array();
+        $query = "SELECT tag, COUNT(*) cnt FROM tag_to_hotel GROUP BY tag ORDER BY cnt DESC";
+        $query_result = parent::db_query($query);
+        while ($row = $query_result->fetch_assoc()) {
+            $result[] = array(
+                'label' => $row['tag']
+            );
+        }
+        return $result;
+    }
 }
