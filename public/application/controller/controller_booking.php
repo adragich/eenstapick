@@ -46,7 +46,6 @@ class Controller_Booking extends Controller {
         );
         $response = $this->externalRequest($this->url . $this->hotelsUrl, $requestData);
         if($response){
-            $tagsArr = array();
             $result = json_decode($response);
 
             $tags = $this->model->getTags();
@@ -56,9 +55,10 @@ class Controller_Booking extends Controller {
                 }
             }
             $tagsResult = $this->model->getSortedTags();
-            if(isset($this->params['page'])){
-                $result->result = array_slice($result->result,($this->params['page']-1)*$this->limit, $this->limit);
+            if(!isset($this->params['page'])){
+                $this->params['page'] = 1;
             }
+            $result->result = array_slice($result->result,($this->params['page']-1)*$this->limit, $this->limit);
             $result = array(
                 'status' => 'ok',
                 'result' => json_decode(json_encode($result->result)),
@@ -91,11 +91,12 @@ class Controller_Booking extends Controller {
             return json_encode($result);
         }
         $hotels = json_decode($this->action_getHotels());
+        if(!isset($this->params['page'])){
+            $this->params['page'] = 1;
+        }
         if ($hotels && $hotels->status == 'ok'){
             if(!isset($this->params['tags'])){
-                if(isset($this->params['page'])){
-                    $hotels->result = array_slice($hotels->result,($this->params['page']-1)*$this->limit, $this->limit);
-                }
+                $hotels->result = array_slice($hotels->result,($this->params['page']-1)*$this->limit, $this->limit);
                 $result = array(
                     'status' => 'ok',
                     'result' => json_decode(json_encode($hotels->result)),
@@ -113,12 +114,11 @@ class Controller_Booking extends Controller {
                         }
                     }
                 }
-                if(isset($this->params['page'])){
-                    $hotels->result = array_slice($hotels->result,($this->params['page']-1)*$this->limit, $this->limit);
-                }
+                $hotels->result = array_slice($hotelsArr,($this->params['page']-1)*$this->limit, $this->limit);
+
                 $result = array(
                     'status' => 'ok',
-                    'result' => json_decode(json_encode($hotelsArr)),
+                    'result' => json_decode(json_encode($hotels->result)),
                     'tags' => json_decode(json_encode($hotels->tags))
                 );
                 return json_encode($result);
