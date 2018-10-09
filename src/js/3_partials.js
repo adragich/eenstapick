@@ -1,6 +1,5 @@
-//todo sort on client side
+//todo debugging
 $(function () {
-    // VueRangedatePicker.default.install(Vue);
     const app = new Vue({
         el: '#app',
         data: {
@@ -11,7 +10,7 @@ $(function () {
             api: {
                 getHotels: 'http://nastenaliv.temp.swtest.ru/booking/getHotels/',
                 getHotelsByTags: 'http://nastenaliv.temp.swtest.ru/booking/getHotelsByTag/',
-                //tag string in get parameters
+                //tag string in get parameters - for future usage
                 getConnectedTags: ''
             },
             loading: false,
@@ -175,9 +174,6 @@ $(function () {
                     console.error(e);
                 }
             },
-            sortResults(tag) {
-
-            },
             setTags(tag){
                 this.selectedTags = [tag];
                 this.tags.forEach(el=>{
@@ -203,6 +199,7 @@ $(function () {
             onDateSelected: function (daterange) {
                 Vue.set(this.search, 'dateRange', daterange);
             },
+            // for future usage
             // addTag() {
             //     if (this.search.custom === '') return;
             //     let tag = {
@@ -212,12 +209,6 @@ $(function () {
             //     this.tags.push(tag);
             //     this.selectedTags.push(tag);
             // },
-            sort: function (key) {
-                this.$refs.cpt.sort(key);
-            },
-            filter: function (key) {
-                this.$refs.cpt.filter(key);
-            },
             removeTag(tag){
                 let i = this.selectedTags.indexOf(tag);
                 this.tags.splice(this.tags.indexOf(tag), 1);

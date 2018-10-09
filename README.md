@@ -1,7 +1,7 @@
 
 Eenstapick.io
 ============
-Project is a fully responsive tool for letting user find the most personalized output when they are searching for a hotel. Based on **[Vue](https://vuejs.org/)** framework.
+Project is a mobile-oriented tool for letting user find the most personalized output when they are searching for a hotel. Based on **[Vue](https://vuejs.org/)** framework.
 
 #### Package managers:
 * npm

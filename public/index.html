@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="css/main.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <link rel="icon"
+          type="image/ico"
+          href="favicon.ico">
 </head>
 <body>
 
@@ -36,12 +39,6 @@
                     </li>
                 </ul>
             </div>
-
-            <!--<div class="input-field flex-column">-->
-                <!--<label for="datepick" class="offset">Dates:</label>-->
-                <!--<vue-rangedate-picker @selected="onDateSelected" compact="false" i18n="EN">-->
-                <!--</vue-rangedate-picker>-->
-            <!--</div>-->
         </form>
     </div>
     <div class="selected-tags" v-if="selectedTags.length > 0">
@@ -77,6 +74,7 @@
                     </div>
                 </div>
             </div>
+            <!--use this link if you want to make request to server-->
             <!--<a href="#" class="button" v-on:click.stop.prevent="getHotels(currentCity, true)">Search</a>-->
             <a href="#" class="button" v-on:click.stop.prevent="getHotelsByTags()">Search</a>
 

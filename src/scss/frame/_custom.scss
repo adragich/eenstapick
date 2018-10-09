@@ -1,28 +1,3 @@
-//for 10 columns
-@each $space in $rwd-spaces {
-
-  $window-width: 0px;
-
-  @if $space == sm {
-    $window-width: 675px;
-  }
-  @if $space == md {
-    $window-width: 1025px;
-  }
-  @if $space == lg {
-    $window-width: 1500px;
-  }
-  @each $col in $rwd-columns {
-
-    @media (min-width: $window-width) {
-      .col-#{$space}-#{$col}-10 {
-        width: 10% * $col;
-      }
-    }
-
-  }
-}
-
 [class*='flex']{
   display: flex;
 }
@@ -49,20 +24,8 @@ img {
 .clearfix{
   clear: both;
 }
-.yellow{
-  background: $yellow;
-}
-.red{
-  background: $red;
-}
 .white{
   background: $white!important;
-}
-.black{
-  background: $black;
-}
-.light-grey{
-  background: $light-grey;
 }
 .pointer{
   cursor: pointer;
@@ -89,37 +52,6 @@ img {
 div, section{
   box-sizing: border-box;
 }
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  margin: 0;
-}
-//for 12 columns
-@each $space in $rwd-spaces {
-
-  $window-width: 0px;
-
-  @if $space == sm {
-    $window-width: 675px;
-  }
-  @if $space == md {
-    $window-width: 1025px;
-  }
-  @if $space == lg {
-    $window-width: 1500px;
-  }
-  @each $col in $rwd-columns-2 {
-
-    @media (min-width: $window-width) {
-      .col-#{$space}-#{$col}-12 {
-        width: 100%/12 * $col;
-      }
-    }
-
-  }
-}
 
 //normalize
 body * {
@@ -134,7 +66,6 @@ html {
 body {
   margin: 0;
   font-family: $font-family;
-  color: $black
 }
 
 article,
@@ -216,27 +147,6 @@ input::-moz-focus-inner {
 
 input {
   line-height: normal;
-}
-
-input[type="checkbox"],
-input[type="radio"] {
-  box-sizing: border-box; /* 1 */
-  padding: 0; /* 2 */
-}
-
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-  height: auto;
-}
-
-input[type="search"] {
-  -webkit-appearance: textfield;
-  box-sizing: content-box;
-}
-
-input[type="search"]::-webkit-search-cancel-button,
-input[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
 }
 
 textarea {
@@ -325,7 +235,7 @@ th {
   color: #b8b2b7;
 }
 .white-text {
-  color: white;
+  color: $white;
 }
 
 .bold {
