@@ -45,12 +45,13 @@
         </form>
     </div>
     <div class="selected-tags" v-if="selectedTags.length > 0">
-        <span v-for="tag in selectedTags">{{ tag.label }}</span>
+        <span v-for="tag in selectedTags" v-on:click="setTags(tag)">{{ tag.label }}</span>
         <a href="#" v-on:click.stop.prevent="tagState = 'modal';" class="edit">
             Edit
             <img src="images/pen.png" alt="Pen icon">
         </a>
     </div>
+    <img src="images/searchfilter.png" alt="Filters image" class="filters" v-if="sortedHotels().length > 0">
     <!--Filters section end-->
 
     <div class="bg" v-show="tagState == 'modal' || !!loading"></div>
@@ -76,27 +77,8 @@
                     </div>
                 </div>
             </div>
+            <!--<a href="#" class="button" v-on:click.stop.prevent="getHotels(currentCity, true)">Search</a>-->
             <a href="#" class="button" v-on:click.stop.prevent="getHotelsByTags()">Search</a>
-            <!--todo delete it in the end if nothing is changed-->
-            <!--<br>-->
-            <!--<p class="offset">Custom input:</p>-->
-            <!--<div class="input-field flex-column">-->
-                <!--<div class="flex">-->
-                    <!--<input type="text" name="custom" class="white" v-model="search.custom"-->
-                           <!--v-on:keyup="suggestTag()"-->
-                           <!--v-on:change="suggestTag()"-->
-                           <!--v-bind:class="{'dis': selectedTags.length > 2}"-->
-                           <!--v-bind:disabled="selectedTags.length > 2"-->
-                           <!--placeholder="type in custom tag">-->
-                    <!--<a href="#" v-on:click.stop.prevent="addTag()">submit</a>-->
-                <!--</div>-->
-
-                <!--<div class="autocomplete-list" v-if="suggested.length > 0">-->
-                    <!--<ul>-->
-                        <!--<li v-for="tag in suggested"><a href="">{{tag}}</a></li>-->
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</div>-->
 
         </div>
     </div>
@@ -112,21 +94,32 @@
     <!--Loading wrap ends-->
 
     <!--Results wrap-->
-    <div class="results-wrap" v-if="results.length > 0">
-        <div class="result flex-column" v-for="result in results" v-on:click="showDummyHotel = true;">
+    <div class="results-wrap" v-if="sortedHotels().length > 0">
+        <div class="result flex-column" v-for="result in sortedHotels()" v-on:click="showDummyHotel = true;">
             <div class="flex">
                 <div class="preview">
                     <img v-bind:src="result.hotel_data.hotel_photos[0].url_max300" alt="Hotel thumb">
                 </div>
                 <div class="description">
                     <p class="hotel-title">{{result.hotel_data.name }}</p>
-                    <p>{{ shorten(result.hotel_data.hotel_description, 100) }}</p>
+                    <div class="stars">
+                        <span v-for="i in new Array(result.hotel_data.exact_class)">
+                            <img src="images/star.png" alt="Star icon">
+                        </span>
+                        <img src="images/thumbup.png" class="thumb" alt="Thumbup Icon" v-if="!!result.hotel_data.preferred">
+                    </div>
+                    <div class="rating">
+                        <span>{{ zeros(result.hotel_data.review_score) }}</span> Fabulous
+                    </div>
+                    <div class="location">
+                        <p>
+                            <img src="images/pin.png" alt="Pin Icon">
+                            {{ result.hotel_data.city}}, {{result.hotel_data.address }}</p>
+                    </div>
+                    <div class="price"> € {{randomPrice()}}</div>
                 </div>
                 <img src="images/arrow.png" alt="Arrow icon" class="absolute arrow">
             </div>
-            <!--<div class="hotel-tags flex-column" v-if="typeof result.tags !== 'undefined'">-->
-                <!--<div v-for="tag in result.tags"><span>{{tag}}</span></div>-->
-            <!--</div>-->
         </div>
     </div>
     <!--Results wrap end-->
@@ -135,7 +128,7 @@
     <div class="hotel-view" v-show="!!showDummyHotel">
         <span class="back" v-on:click="showDummyHotel = false;"></span>
         <span class="thanks" v-on:click="showThanks = true;"></span>
-        <img src="images/hotel-detail.png" alt="Hotel view">
+        <img src="images/HotelDetail.png" alt="Hotel view">
     </div>
     <!--Single hotel view end-->
 

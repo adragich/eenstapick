@@ -10950,6 +10950,7 @@ void 0!==c?null===c?void r.removeAttr(a,b):e&&"set"in e&&void 0!==(d=e.set(a,c,b
     return Vue;
 
 })));
+//todo sort on client side
 $(function () {
     // VueRangedatePicker.default.install(Vue);
     const app = new Vue({
@@ -11091,8 +11092,26 @@ $(function () {
                     console.error(e);
                 }
             },
-            getHotelsByTags(){
+            sortedHotels(){
+                if(this.selectedTags.length == 0) return this.results;
+                else {
+                    let sorted = [],
+                        tags = this.selectedTags.map(el => { return el.label});
 
+                    this.results.forEach(el=>{
+                        var resTags = el.tags.join(','), check = true;
+                        for(let i = 0; i < tags.length; i++) {
+                            check = resTags.indexOf(tags[i]) > -1;
+                            if(!check) break;
+                        }
+                        if(!!check) sorted.push(el);
+                    });
+
+                    return sorted;
+                }
+            },
+            getHotelsByTags(){
+                this.tagState = 'modal hid';
             },
             suggestTag(){
                 try {
@@ -11111,6 +11130,12 @@ $(function () {
             sortResults(tag) {
 
             },
+            setTags(tag){
+                this.selectedTags = [tag];
+                this.tags.forEach(el=>{
+                    if(el.label != tag.label) Vue.set(el, 'selected', false);
+                })
+            },
             toggleTag(tag){
                 try {
                     let index = this.selectedTags.indexOf(tag),
@@ -11120,7 +11145,6 @@ $(function () {
 
                     if (!selected) this.selectedTags.push(tag);
                     else {
-                        console.log(index);
                         this.selectedTags.splice(index, 1);
                     }
                     Vue.set(tag, 'selected', !selected)
@@ -11153,6 +11177,13 @@ $(function () {
                     this.selectedTags.splice(i, 1);
 
                 if (this.tags.length == 0) this.tagState = 'modal hid';
+            },
+            zeros(n){
+                if(n.toString().indexOf('.') == -1) return n + ',0';
+                else return n.toString().replace('.', ',');
+            },
+            randomPrice(){
+                return (Math.floor(Math.random() * 6) + 9) * 100;
             }
         }
     });

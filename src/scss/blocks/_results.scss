@@ -14,10 +14,11 @@
     + div {
       width: 60%;
       padding-right: 20px;
+      padding-bottom: 55px;
     }
   }
   .hotel-title {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 600;
   }
 
@@ -62,4 +63,50 @@
 .arrow {
   right: 4px;
   top: calc(50% - 5px);
+}
+
+.rating {
+  color: #00378b;
+  font-weight: 600;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  margin-top: 6px;
+  span {
+    background: #00378b;
+    color: #fff;
+    width: 24px;
+    display: inline-block;
+    line-height: 24px;
+    font-size: 12px;
+    text-align: center;
+    border-radius: 4px 4px 4px 0;
+    margin-right: 5px;
+  }
+}
+
+.stars {
+  align-items: center;
+  display: flex;
+  margin-top: 3px;
+  .thumb {
+    margin-left: 4px;
+  }
+}
+
+.location {
+  line-height: 23px;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+.price {
+  color: #0ab21b;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: right;
+  width: 100%;
+  position: absolute;
+  right: 10px;
+  bottom: 15px;
 }
