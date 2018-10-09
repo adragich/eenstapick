@@ -1,6 +1,35 @@
 .result {
   position: relative;
-  background: #dfdfdf;
+  background: #fafbfc;
   margin: 0 0 15px;
   padding: 15px;
+}
+
+.results-wrap {
+  margin-top: -10px;
+  background: $bg-grey;
+}
+
+.loading {
+  position: absolute;
+  width: auto;
+  left: 17px;
+  right: 17px;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  height: 185px;
+  top: 224px;
+  text-align: center;
+  .inner {
+    align-items: center;
+    img {
+      margin-bottom: 30px;
+    }
+    span {
+      max-width: 200px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+  }
 }

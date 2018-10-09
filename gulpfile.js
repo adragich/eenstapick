@@ -31,6 +31,7 @@ gulp.task('styles', function() {
 
      gulp.src('src/scss/**/*.scss')
          .pipe(sass())
+         .on('error', console.log)
          .pipe(autoprefixer({browsers: ['> 1%', 'last 2 versions', 'Firefox ESR', 'Opera 12.1'],cascade: false}))
          .pipe(concat('main.css'))
          .pipe(gulp.dest('src/css'));
@@ -39,7 +40,12 @@ gulp.task('styles', function() {
 });
 
 gulp.task('scripts', function() {
-    return gulp.src(['src/js/1_jquery.js', 'src/js/2_vue.min.js', 'src/js/3_datepicker.js' , 'src/js/3_partials.js'])
+    return gulp.src(['src/js/1_jquery.js',
+        'src/js/2_vue.min.js',
+        // 'src/js/lodash.min.js',
+        'src/js/isotope.js',
+        // 'src/js/3_datepicker.js' ,
+        'src/js/3_partials.js'])
         .pipe(concat('bundle.js'))
         // .pipe(uglify())
         .pipe(gulp.dest('public/js'));

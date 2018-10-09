@@ -133,7 +133,7 @@ html {
 
 body {
   margin: 0;
-  font-family: $karbon-semibold;
+  font-family: $font-family;
   color: $black
 }
 
@@ -253,17 +253,9 @@ th {
   padding: 0;
 }
 
-.button{
-  border: 0;
-  border-radius: 8px;
-  border-bottom: 2px solid $red;
-  padding: 20px 50px;
-  display: inline-block;
-  overflow: hidden;
-}
 .container{
   margin: 0 auto;
-  width: 92.55%;
+  width: 100%;
 }
 .section-header{
   padding: 78px 0;
@@ -283,7 +275,7 @@ th {
 
 .app-wrap {
   > div {
-    padding: 10px 20px;
+    padding: 10px 16px;
   }
 }
 
@@ -296,6 +288,9 @@ th {
     line-height: 30px;
     padding: 0 10px;
     border-radius: 2px;
+    &.dis {
+      background: #ddd!important;
+    }
   }
 }
 
@@ -309,4 +304,8 @@ th {
 
 .offset {
   margin: 0 0 15px;
+}
+
+.hidden {
+  display: none!important;
 }
