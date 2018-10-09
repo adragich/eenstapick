@@ -679,18 +679,79 @@ th {
 .hidden {
   display: none !important; }
 
+.capitalize {
+  text-transform: capitalize; }
+
+.full-fixed, .hotel-view {
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  letter-spacing: 1px; }
+
+.light {
+  color: #b8b2b7; }
+
+.white-text {
+  color: white; }
+
+.bold {
+  font-weight: bold; }
+
+.thanks {
+  position: absolute;
+  bottom: 245px;
+  width: 100%;
+  left: 0;
+  height: 50px; }
+
+.hotel-view {
+  padding: 0 !important;
+  overflow-y: scroll; }
+  .hotel-view .back {
+    width: 40px;
+    height: 40px;
+    top: 0;
+    left: 0;
+    position: absolute;
+    cursor: pointer; }
+  .hotel-view img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+    object-fit: cover; }
+
+.orange {
+  background: #f7bd33; }
+
 .result {
   position: relative;
   background: #fafbfc;
-  margin: 0 0 15px;
-  padding: 15px; }
+  margin: 0 0 8px;
+  padding: 4px;
+  border-bottom: 1px solid #dcdde2; }
+  .result img {
+    -o-object-fit: cover;
+    object-fit: cover; }
+  .result .preview {
+    width: 40%;
+    margin-right: 4px;
+    display: -ms-flexbox;
+    display: flex; }
+    .result .preview + div {
+      width: 60%;
+      padding-right: 20px; }
+  .result .hotel-title {
+    font-size: 18px;
+    font-weight: 600; }
 
 .results-wrap {
-  margin-top: -10px;
-  background: #f2f4f6; }
+  background: #f2f4f6;
+  min-height: 100vh; }
 
 .loading {
-  position: absolute;
+  position: fixed;
   width: auto;
   left: 17px;
   right: 17px;
@@ -705,10 +766,14 @@ th {
     align-items: center; }
     .loading .inner img {
       margin-bottom: 30px; }
-    .loading .inner span {
+    .loading .inner p {
       max-width: 200px;
       font-size: 13px;
       font-weight: 600; }
+
+.arrow {
+  right: 4px;
+  top: calc(50% - 5px); }
 
 .tags-wrap {
   background: #fff;
@@ -716,7 +781,9 @@ th {
   .tags-wrap .tags {
     width: auto;
     min-width: 100%;
-    margin: 10px -4px 8px; }
+    margin: 10px -4px 8px;
+    max-height: 190px;
+    overflow: hidden; }
     .tags-wrap .tags > div {
       width: 100%;
       -ms-flex-pack: justify;
@@ -730,7 +797,7 @@ th {
 
 .tag {
   position: relative;
-  padding: 17px 50px 17px 20px;
+  padding: 17px 40px 17px 20px;
   border-radius: 4px;
   background: white;
   border: 2px solid #1a75d4;
@@ -804,8 +871,60 @@ th {
   font-weight: 600;
   letter-spacing: 0.5px; }
 
+.selected-tags {
+  background: #1a75d4;
+  position: relative;
+  border: 1px solid #ffffff;
+  padding: 16px; }
+  .selected-tags:before {
+    content: '';
+    height: 1px;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    background: #f7bd33; }
+  .selected-tags span, .selected-tags a {
+    background: #f7bd33;
+    color: #fff;
+    text-transform: capitalize;
+    padding: 0 28px 0 12px;
+    line-height: 29px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    font-size: 13px;
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-right: 10px;
+    text-decoration: none;
+    outline: none;
+    float: left; }
+    .selected-tags span.edit, .selected-tags a.edit {
+      background: #31373f;
+      padding-right: 12px;
+      margin: 0; }
+      .selected-tags span.edit img, .selected-tags a.edit img {
+        padding-left: 15px;
+        position: relative;
+        top: 2px; }
+
+.filters-wrap.expanded .autocomplete-list {
+  top: 293px;
+  left: 6px;
+  right: 6px; }
+
+.filters-wrap.expanded .input-field .close {
+  top: 12px;
+  right: 4px; }
+
 .autocomplete-list {
-  padding: 0 6px; }
+  padding: 0;
+  z-index: 1;
+  position: absolute;
+  width: auto;
+  left: 0;
+  right: 0;
+  top: 141px; }
   .autocomplete-list ul {
     list-style-type: none;
     padding: 0;
@@ -814,11 +933,14 @@ th {
     margin: 2px 0 0;
     background: #fff; }
     .autocomplete-list ul a {
-      line-height: 33px;
-      padding: 7px 12px;
+      padding: 12.5px;
+      display: -ms-flexbox;
+      display: flex;
+      -ms-flex-align: center;
+      align-items: center;
       width: 100%;
-      display: inline-block;
       text-decoration: none;
+      box-sizing: border-box;
       color: #222; }
       .autocomplete-list ul a img {
         width: 24px;
@@ -833,7 +955,7 @@ th {
 .filters-wrap {
   background-size: cover; }
   .filters-wrap.collapsed .input-field {
-    margin: 72px -16px 0;
+    margin: 72px -16px -10px;
     padding: 17px;
     width: auto; }
     .filters-wrap.collapsed .input-field input {

@@ -15,46 +15,8 @@ $(function () {
             },
             loading: false,
             tagState: 'modal hid',
-            tags: [
-                {
-                    label: 'Cozy'
-                },
-                {
-                    label: 'Castle'
-                },
-                {
-                    label: 'Delicious'
-                },
-                {
-                    label: 'Beach'
-                },
-                {
-                    label: 'Delicious'
-                },
-                {
-                    label: 'Beach'
-                },
-            ],
-            results: [
-                {
-                    title: 'Cheap hotel',
-                    description: 'Lorem ipsum',
-                    thumb: 'images/1.jpg',
-                    tags: ['cheap', 'delisious', 'beach']
-                },
-                {
-                    title: 'Romantic hotel',
-                    description: 'Lorem ipsum',
-                    thumb: 'images/2.jpg',
-                    tags: ['sights', 'art', 'romantic']
-                },
-                {
-                    title: 'Business hotel',
-                    description: 'Lorem ipsum',
-                    thumb: 'images/3.jpg',
-                    tags: ['business', 'castle', 'activities']
-                },
-            ],
+            tags: [],
+            results: [],
             cities: [],
             // currentCity: null,
             currentCity: {id: 1},
@@ -67,29 +29,36 @@ $(function () {
                 },
                 custom: ''
             },
-            selectedTags: [
-                {
-                    label: 'Delicious'
-                },
-                {
-                    label: 'Beach'
-                },
-                {
-                    label: 'Cozy'
-                },],
+            selectedTags: [],
             suggested: [],
+            showDummyHotel: false,
+            showThanks: false
         },
         mounted() {
             this.userLang = navigator.language || navigator.userLanguage;
         },
         methods: {
+            shorten(str, n) {
+              if(str.length <= n) return str;
+              else {
+                  return str.substr(0, n) + '...';
+              }
+            },
             getNiceTagsString(){
-                let last = this.selectedTags.length - 1,
-                    comaArray = this.selectedTags.slice(0, last);
-                    str = comaArray.map(el => {
-                        return el.label;
+                if(this.selectedTags.length > 0) {
+                    let firstUp = (label) => {
+                            return label.charAt(0).toUpperCase() + label.substr(1)
+                        },
+                        last = this.selectedTags.length - 1,
+                        comaArray = this.selectedTags.slice(0, last);
+                    let str = comaArray.map(el => {
+                        return firstUp(el.label);
                     }).join(', ');
-                return str + ' and ' + this.selectedTags[last].label;
+
+                    if(this.selectedTags.length > 1) str += ' and';
+
+                    return str + ' ' + firstUp(this.selectedTags[last].label);
+                } else return '';
             },
             chunkedItems (array) {
                 var i, j, temparray, chunk = 2, arr = [];
@@ -99,13 +68,11 @@ $(function () {
                 }
                 return arr;
             },
-            //todo implement API
-            //todo work at sort algorithm
-            //todo set up datepicker
             autocomplete(close){
                 try {
                     if (!!close) this.search.autocomplete = '';
                     if (this.search.autocomplete.length > 2) {
+                        this.selectedTags = [];
                         $.get({
                             beforeSend: (xhr) => {
                                 xhr.setRequestHeader("Authorization", "Basic " + btoa(this.apiCredentials.user + ":" +
@@ -131,6 +98,7 @@ $(function () {
                     if (!city) return;
 
                     this.loading = true;
+                    this.cities = [];
                     let url;
                     if (!tags) {
                         url =  this.api.getHotels + '?id=' + city.id;
@@ -139,19 +107,30 @@ $(function () {
                     else {
                         this.tagState = 'modal hid';
                         url =  this.api.getHotelsByTags + '?id=' + city.id + '&tags=' + this.selectedTags.map(el=> {
-                                return el.label;
+                                return el.label.toLowerCase();
                             }).join(',');
                     }
 
-                    console.log(url);
-                    $.get({
+                    $.ajax({
+                        method: 'GET',
                         url: url
-                    }).done((res) => {
-                        this.results = res.result;
-                        this.loading = false;
-                        Vue.nextTick(()=> {
-                            this.tagState = 'modal';
-                        });
+                    }).done((data) => {
+                        let res = JSON.parse(data);
+                        if(res.status == 'ok') {
+                            this.results = res.result;
+                            this.tags = res.tags;
+                            this.loading = false;
+                            Vue.nextTick(()=> {
+                                if(!tags) {
+                                    setTimeout(() => {
+                                        this.tagState = 'modal';
+                                    }, 3000);
+                                }
+                            });
+                        }
+                        else {
+                            console.log(res);
+                        }
                     }).fail((res)=> {
                         console.log(res);
                         this.loading = false;
@@ -159,6 +138,9 @@ $(function () {
                 } catch (e) {
                     console.error(e);
                 }
+            },
+            getHotelsByTags(){
+
             },
             suggestTag(){
                 try {
@@ -173,11 +155,6 @@ $(function () {
                 } catch (e) {
                     console.error(e);
                 }
-            },
-            //tags parameter get request
-            //{status: '', result: []}
-            getResultsByTags(){
-
             },
             sortResults(tag) {
 
@@ -202,15 +179,15 @@ $(function () {
             onDateSelected: function (daterange) {
                 Vue.set(this.search, 'dateRange', daterange);
             },
-            addTag() {
-                if (this.search.custom === '') return;
-                let tag = {
-                    label: this.search.custom,
-                    selected: true
-                };
-                this.tags.push(tag);
-                this.selectedTags.push(tag);
-            },
+            // addTag() {
+            //     if (this.search.custom === '') return;
+            //     let tag = {
+            //         label: this.search.custom,
+            //         selected: true
+            //     };
+            //     this.tags.push(tag);
+            //     this.selectedTags.push(tag);
+            // },
             sort: function (key) {
                 this.$refs.cpt.sort(key);
             },

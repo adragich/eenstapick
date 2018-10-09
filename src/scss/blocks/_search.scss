@@ -1,8 +1,28 @@
 .filters-wrap {
+  &.expanded {
+    .autocomplete-list {
+      top: 293px;
+      left: 6px;
+      right: 6px;
+    }
+    .input-field{
+      .close {
+        top: 12px;
+        right: 4px;
+      }
+    }
+  }
 }
 
 .autocomplete-list {
-  padding: 0 6px;
+  padding: 0;
+  z-index: 1;
+  position: absolute;
+  width: auto;
+  left: 0;
+  right: 0;
+  top: 141px;
+
   ul {
     list-style-type: none;
     padding: 0;
@@ -11,11 +31,12 @@
     margin: 2px 0 0;
     background: #fff;
     a {
-      line-height: 33px;
-      padding: 7px 12px;
+      padding: 12.5px;
+      display: flex;
+      align-items: center;
       width: 100%;
-      display: inline-block;
       text-decoration: none;
+      box-sizing: border-box;
       color: #222;
       img {
         width: 24px;
@@ -36,7 +57,7 @@
   background-size: cover;
   &.collapsed {
     .input-field {
-      margin: 72px -16px 0;
+      margin: 72px -16px -10px;
       padding: 17px;
       width: auto;
       input {

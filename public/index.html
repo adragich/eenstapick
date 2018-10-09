@@ -13,7 +13,7 @@
 
     <!--Filters section-->
     <div class="filters-wrap" v-bind:class="results.length > 0 ? 'collapsed' : 'expanded'">
-        <form action="" class="inside flex-column">
+        <form action="" class="inside flex-column relative">
             <div class="input-field flex-column">
                 <label for="autocomplete" class="offset hidden">Where you go?</label>
                 <input id="autocomplete" v-on:keyup="autocomplete()"
@@ -27,14 +27,15 @@
                 <ul v-if="cities.length > 0">
                     <li v-for="city in cities">
                         <a href="#" v-on:click.stop.prevent="getHotels(city)">
-                            <!--<img v-bind:src="" v-bind:alt="city.name + ' thumb'">-->
-                            {{ city.name }}
+                            <img src="images/1.jpg" v-bind:alt="city.name + ' thumb'">
+                            <span class="flex-column">
+                                <span>{{ city.name }}</span>
+                                <span class="light">{{city.label}}</span>
+                            </span>
                         </a>
                     </li>
                 </ul>
             </div>
-
-            <!--todo implement selected tags filter view-->
 
             <!--<div class="input-field flex-column">-->
                 <!--<label for="datepick" class="offset">Dates:</label>-->
@@ -43,13 +44,20 @@
             <!--</div>-->
         </form>
     </div>
+    <div class="selected-tags" v-if="selectedTags.length > 0">
+        <span v-for="tag in selectedTags">{{ tag.label }}</span>
+        <a href="#" v-on:click.stop.prevent="tagState = 'modal';" class="edit">
+            Edit
+            <img src="images/pen.png" alt="Pen icon">
+        </a>
+    </div>
     <!--Filters section end-->
 
     <div class="bg" v-show="tagState == 'modal' || !!loading"></div>
     <!--Tags section:-->
     <!--when there are no results - we open tags in pop-up-->
     <!--when we have search results - collapse tags under the filters-->
-    <div class="tags-wrap" v-bind:class="tagState" v-if="false">
+    <div class="tags-wrap" v-bind:class="tagState">
         <a href="#" class="close" v-on:click.stop.prevent="tagState += ' hid';">
             <img src="images/cancel-thin.png" alt="Close icon">
         </a>
@@ -68,7 +76,7 @@
                     </div>
                 </div>
             </div>
-            <a href="#" class="button" v-on:click.stop.prevent="getHotels(currentCity, true)">Filter</a>
+            <a href="#" class="button" v-on:click.stop.prevent="getHotelsByTags()">Search</a>
             <!--todo delete it in the end if nothing is changed-->
             <!--<br>-->
             <!--<p class="offset">Custom input:</p>-->
@@ -98,27 +106,44 @@
     <div class="loading flex-center" v-if="!!loading">
         <div class="inner flex-column">
             <img src="images/Loading.png" alt="Loading animation">
-            <span>Looking for the best {{ getNiceTagsString()}} hotels</span>
+            <p>Looking for the best {{getNiceTagsString()}} hotels</p>
         </div>
     </div>
     <!--Loading wrap ends-->
 
     <!--Results wrap-->
-    <div class="results-wrap">
-        <div class="result flex" v-for="result in results" v-if="results.length > 0">
-            <div class="preview">
-                <img v-bind:src="result.thumb" alt="Hotel thumb">
-                <p class="hotel-title">{{result.title }}</p>
-                <div class="hotel-tags">
-                    <div v-for="tag in result.tags"><span>{{tag}}</span></div>
+    <div class="results-wrap" v-if="results.length > 0">
+        <div class="result flex-column" v-for="result in results" v-on:click="showDummyHotel = true;">
+            <div class="flex">
+                <div class="preview">
+                    <img v-bind:src="result.hotel_data.hotel_photos[0].url_max300" alt="Hotel thumb">
                 </div>
+                <div class="description">
+                    <p class="hotel-title">{{result.hotel_data.name }}</p>
+                    <p>{{ shorten(result.hotel_data.hotel_description, 100) }}</p>
+                </div>
+                <img src="images/arrow.png" alt="Arrow icon" class="absolute arrow">
             </div>
-            <div class="description">
-                <p>{{ result.description }}</p>
-            </div>
+            <!--<div class="hotel-tags flex-column" v-if="typeof result.tags !== 'undefined'">-->
+                <!--<div v-for="tag in result.tags"><span>{{tag}}</span></div>-->
+            <!--</div>-->
         </div>
     </div>
     <!--Results wrap end-->
+
+    <!--Single hotel view-->
+    <div class="hotel-view" v-show="!!showDummyHotel">
+        <span class="back" v-on:click="showDummyHotel = false;"></span>
+        <span class="thanks" v-on:click="showThanks = true;"></span>
+        <img src="images/hotel-detail.png" alt="Hotel view">
+    </div>
+    <!--Single hotel view end-->
+
+    <!--Thank you view-->
+    <div class="full-fixed orange flex-center white-text bold" v-show="!!showThanks">
+        <p>Thank you!</p>
+    </div>
+    <!--Thank you view end-->
 </section>
 
 <script src="js/bundle.js"></script>

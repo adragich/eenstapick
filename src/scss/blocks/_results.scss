@@ -1,17 +1,35 @@
 .result {
   position: relative;
   background: #fafbfc;
-  margin: 0 0 15px;
-  padding: 15px;
+  margin: 0 0 8px;
+  padding: 4px;
+  border-bottom: 1px solid #dcdde2;
+  img {
+    object-fit: cover;
+  }
+  .preview {
+    width: 40%;
+    margin-right: 4px;
+    display: flex;
+    + div {
+      width: 60%;
+      padding-right: 20px;
+    }
+  }
+  .hotel-title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
 }
 
 .results-wrap {
-  margin-top: -10px;
   background: $bg-grey;
+  min-height: 100vh;
 }
 
 .loading {
-  position: absolute;
+  position: fixed;
   width: auto;
   left: 17px;
   right: 17px;
@@ -26,10 +44,22 @@
     img {
       margin-bottom: 30px;
     }
-    span {
+    p {
       max-width: 200px;
       font-size: 13px;
       font-weight: 600;
     }
   }
+}
+
+//.hotel-tags {
+//  bottom: 0;
+//  padding-left: 4px;
+//  padding-bottom: 4px;
+//  align-items: flex-start;
+//}
+
+.arrow {
+  right: 4px;
+  top: calc(50% - 5px);
 }
