@@ -1,0 +1,312 @@
+//for 10 columns
+@each $space in $rwd-spaces {
+
+  $window-width: 0px;
+
+  @if $space == sm {
+    $window-width: 675px;
+  }
+  @if $space == md {
+    $window-width: 1025px;
+  }
+  @if $space == lg {
+    $window-width: 1500px;
+  }
+  @each $col in $rwd-columns {
+
+    @media (min-width: $window-width) {
+      .col-#{$space}-#{$col}-10 {
+        width: 10% * $col;
+      }
+    }
+
+  }
+}
+
+[class*='flex']{
+  display: flex;
+}
+.flex-center{
+  align-items: center;
+  justify-content: center;
+  //text-align: center;
+}
+img {
+  max-width: 100%;
+}
+.image.absolute{
+  top: 0;
+  left:0;
+  z-index: -1;
+  height: 100%;
+
+  img{
+    width: 100%;
+    height:100%;
+    object-fit: cover;
+  }
+}
+.clearfix{
+  clear: both;
+}
+.yellow{
+  background: $yellow;
+}
+.red{
+  background: $red;
+}
+.white{
+  background: $white!important;
+}
+.black{
+  background: $black;
+}
+.light-grey{
+  background: $light-grey;
+}
+.pointer{
+  cursor: pointer;
+}
+.right{
+  float: right;
+}
+.left{
+  float: left;
+}
+.no-padding{
+  padding: 0!important;
+}
+.no-margin{
+  margin: 0!important;
+}
+.absolute{
+  position: absolute;
+}
+.relative{
+  position: relative;
+}
+
+div, section{
+  box-sizing: border-box;
+}
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+//for 12 columns
+@each $space in $rwd-spaces {
+
+  $window-width: 0px;
+
+  @if $space == sm {
+    $window-width: 675px;
+  }
+  @if $space == md {
+    $window-width: 1025px;
+  }
+  @if $space == lg {
+    $window-width: 1500px;
+  }
+  @each $col in $rwd-columns-2 {
+
+    @media (min-width: $window-width) {
+      .col-#{$space}-#{$col}-12 {
+        width: 100%/12 * $col;
+      }
+    }
+
+  }
+}
+
+//normalize
+body * {
+  word-break: break-word;
+}
+
+html {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: $karbon-semibold;
+  color: $black
+}
+
+article,
+figure,
+footer,
+header,
+main,
+menu,
+nav,
+section {
+  display: block;
+}
+
+[hidden],
+template {
+  display: none;
+}
+
+p {
+  color: inherit;
+  margin: 0;
+}
+
+a {
+  background-color: transparent;
+}
+
+a:active,
+a:hover {
+  outline: 0;
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+img {
+  border: 0;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+button {
+  overflow: visible;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+input {
+  line-height: normal;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+input[type="search"] {
+  -webkit-appearance: textfield;
+  box-sizing: content-box;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+textarea {
+  overflow: auto;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+.button{
+  border: 0;
+  border-radius: 8px;
+  border-bottom: 2px solid $red;
+  padding: 20px 50px;
+  display: inline-block;
+  overflow: hidden;
+}
+.container{
+  margin: 0 auto;
+  width: 92.55%;
+}
+.section-header{
+  padding: 78px 0;
+}
+
+.flex-space-between {
+  justify-content: space-between;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.app-wrap {
+  > div {
+    padding: 10px 20px;
+  }
+}
+
+.input-field {
+  margin-bottom: 15px;
+  input {
+    border: none;
+    background: #ededed;
+    outline: none;
+    line-height: 30px;
+    padding: 0 10px;
+    border-radius: 2px;
+  }
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #222;
+  text-decoration: none;
+}
+
+.offset {
+  margin: 0 0 15px;
+}

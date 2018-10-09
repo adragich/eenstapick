@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Eenstapick</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+<section class="app-wrap flex-column" id="app">
+
+    <!--Filters section-->
+    <div class="filters-wrap" v-bind:class="results.length > 0 ? 'collapsed' : 'expanded'">
+        <form action="" class="inside flex-column">
+            <div class="input-field flex-column">
+                <label for="autocomplete" class="offset">Where you go?</label>
+                <input id="autocomplete" type="text" v-model="search.autocomplete">
+            </div>
+            <div class="input-field flex-column">
+                <label for="datepick" class="offset">Dates:</label>
+                <!--<input id="datepick" type="text" v-model="search.dateRange">-->
+                <vue-rangedate-picker @selected="onDateSelected" compact="false" i18n="EN">
+                </vue-rangedate-picker>
+            </div>
+        </form>
+    </div>
+    <!--Filters section end-->
+
+    <!--Tags section:-->
+    <!--when there are no results - we open tags in pop-up-->
+    <!--when we have search results - collapse tags under the filters-->
+    <div class="tags-wrap" v-bind:class="{'collapsed': results.length > 0 && !showTags,
+    'expanded': results.length > 0 && !!showTags , 'modal': results.length == 0}">
+        <a href="#" class="close">Close</a>
+        <div class="inner">
+            <p class="offset">Select tags:</p>
+            <div class="flex-wrap">
+                <div v-for="tag in tags" class="tag"><p>{{ tag }}</p><a href="#" class="close">x</a></div>
+            </div>
+            <br>
+            <p class="offset">Custom input:</p>
+            <div class="input-field">
+                <input type="text" name="custom" class="white" placeholder="type in custom tag">
+            </div>
+        </div>
+        <div class="loading" v-if="!!loading">
+            <div class="inner">
+                <img src="" alt="Loading animation">
+            </div>
+        </div>
+    </div>
+    <!--Tags section end-->
+
+    <!--Results wrap-->
+    <div class="results-wrap">
+        <div class="result" v-for="result in results" v-if="results.length > 0">
+            <div class="preview">
+                <img v-bind:src="result.thumb" alt="Hotel thumb">
+                <p class="hotel-title">{{result.title }}</p>
+                <div class="hotel-tags">
+                    <div v-for="tag in result.tags"><span>{{tag.label}}</span></div>
+                </div>
+            </div>
+            <div class="description">
+                <p>{{ result.description }}</p>
+            </div>
+            <div class="options">
+                <a href="">Show prices</a>
+            </div>
+        </div>
+    </div>
+    <!--Results wrap end-->
+</section>
+
+<script src="js/bundle.js"></script>
+
+</body>
+</html>
