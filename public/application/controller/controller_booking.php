@@ -53,13 +53,9 @@ class Controller_Booking extends Controller {
             foreach ($result->result as $id => $hotel){
                 if(isset($tags[$hotel->hotel_id])){
                     $result->result[$id]->tags = $tags[$hotel->hotel_id];
-                    $tagsArr = array_merge(array_diff($tags[$hotel->hotel_id],$tagsArr),$tagsArr);
                 }
             }
-            $tagsResult = array();
-            foreach ($tagsArr as $tag){
-                $tagsResult[] = array('label' => $tag);
-            }
+            $tagsResult = $this->model->getSortedTags();
             if(isset($this->params['page'])){
                 $result->result = array_slice($result->result,($this->params['page']-1)*$this->limit, $this->limit);
             }
