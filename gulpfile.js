@@ -42,9 +42,7 @@ gulp.task('styles', function() {
 gulp.task('scripts', function() {
     return gulp.src(['src/js/1_jquery.js',
         'src/js/2_vue.min.js',
-        // 'src/js/lodash.min.js',
-        'src/js/isotope.js',
-        // 'src/js/3_datepicker.js' ,
+        'src/js/isotope.js',,
         'src/js/3_partials.js'])
         .pipe(concat('bundle.js'))
         // .pipe(uglify())
