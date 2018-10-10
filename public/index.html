@@ -48,7 +48,9 @@
             <img src="images/pen.png" alt="Pen icon">
         </a>
     </div>
-    <img src="images/searchfilter.png" alt="Filters image" class="filters" v-if="sortedHotels().length > 0">
+    <img src="images/searchfilter.png" alt="Filters image" class="filters"
+         v-on:click="tagState='modal';"
+         v-if="sortedHotels().length > 0">
     <!--Filters section end-->
 
     <div class="bg" v-show="tagState == 'modal' || !!loading"></div>
@@ -56,6 +58,8 @@
     <!--when there are no results - we open tags in pop-up-->
     <!--when we have search results - collapse tags under the filters-->
     <div class="tags-wrap" v-bind:class="tagState">
+        <!--if use hid class we close pop-up-->
+        <!--<a href="#" class="close" v-on:click.stop.prevent="tagState += '';">-->
         <a href="#" class="close" v-on:click.stop.prevent="tagState += ' hid';">
             <img src="images/cancel-thin.png" alt="Close icon">
         </a>

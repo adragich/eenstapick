@@ -340,7 +340,7 @@ th {
     width: auto;
     min-width: 100%;
     margin: 10px -4px 8px;
-    max-height: 190px;
+    max-height: 194px;
     overflow: hidden; }
     .tags-wrap .tags > div {
       width: 100%;
@@ -364,7 +364,7 @@ th {
   text-transform: capitalize;
   white-space: nowrap;
   font-weight: 600; }
-  .tag:not(.dis):hover, .tag.selected {
+  .tag.selected {
     color: #fff;
     border-color: #f7bd33;
     background: #f7bd33; }

@@ -6,7 +6,8 @@
     min-width: 100%;
     margin: 10px -4px 8px;
 
-    max-height: 190px;
+    max-height: 194px;
+
     overflow: hidden;
     > div {
       width: 100%;
@@ -37,7 +38,7 @@
   white-space: nowrap;
   font-weight: 600;
 
-  &:not(.dis):hover, &.selected {
+  &.selected {
     color: #fff;
     border-color: $orange;
     background: $orange;
