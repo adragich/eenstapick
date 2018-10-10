@@ -236,7 +236,7 @@ th {
     object-fit: cover; }
 
 .orange {
-  background: #f7bd33; }
+  background: #f6bd33; }
 
 .result {
   position: relative;
@@ -366,8 +366,8 @@ th {
   font-weight: 600; }
   .tag.selected {
     color: #fff;
-    border-color: #f7bd33;
-    background: #f7bd33; }
+    border-color: #f6bd33;
+    background: #f6bd33; }
   .tag.dis {
     opacity: 0.5;
     background: white !important; }
@@ -419,7 +419,7 @@ th {
 
 .button {
   width: 100%;
-  background: blue;
+  background: #1a75d4;
   display: inline-block;
   line-height: 67px;
   text-align: center;
@@ -430,7 +430,7 @@ th {
   letter-spacing: 0.5px; }
 
 .selected-tags {
-  background: #1a75d4;
+  background: #00378b;
   position: relative;
   border: 1px solid #ffffff;
   padding: 16px; }
@@ -441,9 +441,9 @@ th {
     position: absolute;
     width: 100%;
     left: 0;
-    background: #f7bd33; }
+    background: #f6bd33; }
   .selected-tags span, .selected-tags a {
-    background: #f7bd33;
+    background: #f6bd33;
     color: #fff;
     text-transform: capitalize;
     padding: 0 28px 0 12px;

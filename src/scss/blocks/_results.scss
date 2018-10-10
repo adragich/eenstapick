@@ -66,14 +66,14 @@
 }
 
 .rating {
-  color: #00378b;
+  color: $blue;
   font-weight: 600;
   font-size: 13px;
   display: flex;
   align-items: center;
   margin-top: 6px;
   span {
-    background: #00378b;
+    background: $blue;
     color: #fff;
     width: 24px;
     display: inline-block;
