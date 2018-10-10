@@ -19,7 +19,7 @@
         <form action="" class="inside flex-column relative">
             <div class="input-field flex-column">
                 <label for="autocomplete" class="offset hidden">Where you go?</label>
-                <input id="autocomplete" v-on:keyup="autocomplete()"
+                <input id="autocomplete" v-on:keyup="autocomplete()" autocomplete="off"
                        placeholder="Type in city:" type="text" v-model="search.autocomplete">
                 <a href="#" class="close" v-on:click.stop,prevent="autocomplete(true)"
                    v-if="search.autocomplete.length > 0">
