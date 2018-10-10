@@ -160,20 +160,21 @@ $(function () {
             getHotelsByTags(){
                 this.tagState = 'modal hid';
             },
-            suggestTag(){
-                try {
-                    let suggested = [];
-                    for (let i = 0; i < this.wordsLibrary.length; i++) {
-                        if (suggested.length > 4 || this.search.custom === '') break;
-                        var el = this.wordsLibrary[i];
-                        if (el.startsWith(this.search.custom)) suggested.push(el);
-
-                    }
-                    this.suggested = suggested;
-                } catch (e) {
-                    console.error(e);
-                }
-            },
+            // for future usage
+            // suggestTag(){
+            //     try {
+            //         let suggested = [];
+            //         for (let i = 0; i < this.wordsLibrary.length; i++) {
+            //             if (suggested.length > 4 || this.search.custom === '') break;
+            //             var el = this.wordsLibrary[i];
+            //             if (el.startsWith(this.search.custom)) suggested.push(el);
+            //
+            //         }
+            //         this.suggested = suggested;
+            //     } catch (e) {
+            //         console.error(e);
+            //     }
+            // },
             setTags(tag){
                 this.selectedTags = [tag];
                 this.tags.forEach(el=>{

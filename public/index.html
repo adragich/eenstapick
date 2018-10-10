@@ -73,7 +73,8 @@
                      'dis': selectedTags.length > 2 && (typeof tag.selected === 'undefined' || !tag.selected)}">
                         <p>{{ tag.label }}</p>
                         <a href="#" class="close" v-on:click.stop.prevent="removeTag(tag)">
-                            <img src="images/cancel-thin.png" alt="Close icon">
+                            <img src="images/white-x.png" alt="Close icon" v-if="typeof tag.selected !== 'undefined' && !!tag.selected">
+                            <img src="images/x.png" alt="Close icon" v-else>
                         </a>
                     </div>
                 </div>

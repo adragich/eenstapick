@@ -355,7 +355,7 @@ th {
 
 .tag {
   position: relative;
-  padding: 17px 40px 17px 20px;
+  padding: 17px 39px 17px 16px;
   border-radius: 4px;
   background: white;
   border: 2px solid #1a75d4;
@@ -364,6 +364,8 @@ th {
   text-transform: capitalize;
   white-space: nowrap;
   font-weight: 600; }
+  .tag p {
+    margin-right: 4px; }
   .tag.selected {
     color: #fff;
     border-color: #f6bd33;
@@ -372,7 +374,7 @@ th {
     opacity: 0.5;
     background: white !important; }
   .tag .close {
-    top: 15px;
+    top: 17px;
     right: 17px; }
     .tag .close img {
       width: 20px; }
