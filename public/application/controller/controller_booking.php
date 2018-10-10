@@ -41,8 +41,8 @@ class Controller_Booking extends Controller {
         $requestData = array(
             'language' => 'en',
             'city_ids' => $cityId,
-            'extras' => 'hotel_description,hotel_facilities,hotel_info,hotel_photos,hotel_policies,payment_details',
-            'rows' => '50',
+            'extras' => 'hotel_info,hotel_photos,hotel_policies',
+            'rows' => $this->limit,
         );
         $response = $this->externalRequest($this->url . $this->hotelsUrl, $requestData);
         if($response){
